@@ -1,0 +1,6 @@
+name: Jrgames
+version: '${project.version}'
+main: cn.jerrymc.jrgames.Jrgames
+api-version: 1.17
+softdepend: [ PlaceholderAPI, Vault, ItemsAdder ]
+authors: [ bcmray ]
