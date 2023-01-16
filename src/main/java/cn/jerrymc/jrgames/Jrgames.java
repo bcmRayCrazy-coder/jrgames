@@ -13,20 +13,22 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Jrgames extends JavaPlugin implements Listener {
     public Economy economy = null;
-    public Storage storage = new Storage();
+    public Storage storage;
 
     public static Jrgames plugin = null;
 
-    private final GameManager gameManager = new GameManager();
+    private GameManager gameManager;
 
     @Override
     public void onEnable() {
-        // 初始化logger
-        LOGGER.logger = this.getLogger();
-
         // 插件初始化
         plugin = this;
+        storage = new Storage();
+        gameManager = new GameManager();
         this.saveDefaultConfig();
+
+        // 初始化logger
+        LOGGER.logger = this.getLogger();
 
         // 初始化插件对接
         if(!initVault()){
