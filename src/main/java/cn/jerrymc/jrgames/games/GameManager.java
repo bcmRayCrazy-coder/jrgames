@@ -9,6 +9,7 @@ public class GameManager {
     public static ArrayList<Game> games;
 
     public void initGames(Jrgames plugin){
+        new SnowFight(plugin);
     }
 
     public static void registerGame(Game game){

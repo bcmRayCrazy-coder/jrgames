@@ -1,5 +1,6 @@
 package cn.jerrymc.jrgames;
 
+import cn.jerrymc.jrgames.games.GameManager;
 import dev.lone.itemsadder.api.Events.ItemsAdderLoadDataEvent;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
@@ -15,6 +16,8 @@ public final class Jrgames extends JavaPlugin implements Listener {
     public Storage storage = new Storage();
 
     public static Jrgames plugin = null;
+
+    private final GameManager gameManager = new GameManager();
 
     @Override
     public void onEnable() {
@@ -57,7 +60,13 @@ public final class Jrgames extends JavaPlugin implements Listener {
     // 等待ia完成初始化
     @EventHandler
     private void onIAItemLoaded(ItemsAdderLoadDataEvent event){
-        // 初始化自己的ia事件
+        // 初始化游戏
+        initGames();
+    }
+
+    private void initGames(){
+        gameManager.initGames(this);
+        LOGGER.logger.info(ChatColor.BLUE+"游戏初始化完成!");
     }
 
     @Override
