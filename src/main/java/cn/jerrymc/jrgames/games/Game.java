@@ -12,10 +12,15 @@ import java.util.ArrayList;
 
 public class Game {
     private final Jrgames plugin;
+    // 滴答
     private final Number tick = 0;
+    // 游戏id
     private String gameName = "";
+    // 显示的名字
     private String displayName = "";
+    // 当前游戏状态
     private GameState gameState = GameState.WAITING;
+    // 游戏监听器
     private ArrayList<Listener> gameListeners;
 
     public ArrayList<Player> players;
@@ -31,12 +36,25 @@ public class Game {
         }
     }
 
+    /**
+     * 时刻改变
+     * @param tick 目前时刻
+     */
     public void onTick(Number tick){}
 
+    /**
+     * 玩家进入游戏
+     * @param p 玩家
+     */
     public void onPlayerJoin(Player p){
         players.add(p);
         Bukkit.getPluginManager().callEvent(new PlayerJoinGameEvent(p,getGameName()));
     }
+
+    /**
+     * 玩家离开游戏
+     * @param p 玩家
+     */
     public void onPlayerLeave(Player p){
         players.remove(p);
         Bukkit.getPluginManager().callEvent(new PlayerLeaveGameEvent(p,getGameName()));

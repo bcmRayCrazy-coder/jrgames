@@ -1,8 +1,10 @@
 package cn.jerrymc.jrgames.games.events;
 
 import cn.jerrymc.jrgames.games.GameState;
-import org.bukkit.event.Event;
 
+/**
+ * 游戏状态改变事件
+ */
 public class GameStateChangeEvent extends GameEvent {
     private final GameState currentGameState;
 

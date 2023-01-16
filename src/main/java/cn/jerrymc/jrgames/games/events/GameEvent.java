@@ -6,6 +6,9 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
+/**
+ * 游戏内事件
+ */
 public class GameEvent extends Event {
     private static final HandlerList HANDLERS = new HandlerList();
     private final String gameName;

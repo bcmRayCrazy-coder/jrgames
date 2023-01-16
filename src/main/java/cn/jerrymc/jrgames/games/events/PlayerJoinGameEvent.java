@@ -1,10 +1,10 @@
 package cn.jerrymc.jrgames.games.events;
 
 import org.bukkit.entity.Player;
-import org.bukkit.event.Event;
-import org.bukkit.event.HandlerList;
-import org.jetbrains.annotations.NotNull;
 
+/**
+ * 玩家加入游戏事件
+ */
 public class PlayerJoinGameEvent extends GameEvent {
     private final Player player;
 

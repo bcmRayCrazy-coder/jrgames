@@ -5,6 +5,9 @@ import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * 玩家离开游戏事件
+ */
 public class PlayerLeaveGameEvent extends GameEvent {
     private final Player player;
 
