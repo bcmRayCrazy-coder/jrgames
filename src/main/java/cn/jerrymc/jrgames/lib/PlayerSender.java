@@ -2,6 +2,8 @@ package cn.jerrymc.jrgames.lib;
 
 import cn.jerrymc.jrgames.Jrgames;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
 public class PlayerSender {
@@ -14,11 +16,11 @@ public class PlayerSender {
     }
 
     /**
-     * 设置玩家所在世界
+     * 传送玩家到世界
      * @param player 玩家
      * @param worldName 目标世界名称
      */
     public static void setPlayerWorld(Player player,String worldName){
-        player.getLocation().setWorld(Bukkit.getWorld(worldName));
+        Jrgames.plugin.getServer().dispatchCommand(Bukkit.getConsoleSender(),"mv tp "+player+" "+worldName);
     }
 }

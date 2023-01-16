@@ -7,4 +7,4 @@ authors: [ bcmray ]
 commands:
   jstopall:
     description: 强制停止所有游戏
-    usage: /<command>
+    usage: /jstopall
