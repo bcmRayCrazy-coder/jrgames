@@ -1,6 +1,7 @@
 package cn.jerrymc.jrgames.games.listeners;
 
 import cn.jerrymc.jrgames.Jrgames;
+import cn.jerrymc.jrgames.LOGGER;
 import cn.jerrymc.jrgames.games.Game;
 import cn.jerrymc.jrgames.games.GameManager;
 import org.bukkit.event.EventHandler;
@@ -12,6 +13,8 @@ public class PlayerEventsListener implements Listener {
     public void onWorldChange(PlayerChangedWorldEvent event){
         String worldName = event.getPlayer().getWorld().getName();
         String originWorldName = event.getFrom().getName();
+
+        LOGGER.logger.info(String.format("玩家 %s 从地图 %s 进入了地图 %s",event.getPlayer().getName(),originWorldName,worldName));
 
         for(Game game:GameManager.getGames()){
             // 当前game的地图名

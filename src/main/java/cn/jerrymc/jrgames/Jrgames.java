@@ -48,6 +48,8 @@ public final class Jrgames extends JavaPlugin implements Listener {
             getServer().getPluginManager().disablePlugin(this);
         }
 
+        initGames();
+
         LOGGER.logger.info(ChatColor.GREEN+"初始化完成!");
     }
 
@@ -57,13 +59,6 @@ public final class Jrgames extends JavaPlugin implements Listener {
         assert rsp != null;
         economy = rsp.getProvider();
         return true;
-    }
-
-    // 等待ia完成初始化
-    @EventHandler
-    private void onIAItemLoaded(ItemsAdderLoadDataEvent event){
-        // 初始化游戏
-        initGames();
     }
 
     private void initGames(){

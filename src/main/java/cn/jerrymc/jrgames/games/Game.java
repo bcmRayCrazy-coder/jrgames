@@ -21,9 +21,9 @@ public class Game {
     // 当前游戏状态
     private GameState gameState = GameState.WAITING;
     // 游戏监听器
-    private ArrayList<Listener> gameListeners;
+    private ArrayList<Listener> gameListeners = new ArrayList<>();
 
-    public ArrayList<Player> players;
+    public ArrayList<Player> players = new ArrayList<>();
 
     public Game(Jrgames plugin){
         this.plugin = plugin;
