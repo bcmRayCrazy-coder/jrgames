@@ -16,13 +16,13 @@ public class ScreenEffects {
      * @param message 显示文字
      */
     public static void startEffect(String type,String color,Number fadeIn,Number stay,Number fadeOut,Boolean freeze,String player,String message){
-        String cmd = "screeneffect " + type +
-                color +
-                fadeIn +
-                stay +
-                fadeOut +
-                (freeze ? "freeze" : "nofreeze") +
-                player +
+        String cmd = "screeneffect " + type + " " +
+                color + " " +
+                fadeIn +" " +
+                stay +" " +
+                fadeOut +" " +
+                (freeze ? "freeze" : "nofreeze") +" " +
+                player +" " +
                 message;
         Jrgames.plugin.getServer().dispatchCommand(Bukkit.getConsoleSender(), cmd);
     }
