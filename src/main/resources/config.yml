@@ -1,1 +1,8 @@
 # JrGames小游戏主插件配置
+
+# 主城所在的世界名
+lobby: 'world'
+
+# 游戏对应的地图名
+gameMap:
+  snowFight: 'snow_fight'
