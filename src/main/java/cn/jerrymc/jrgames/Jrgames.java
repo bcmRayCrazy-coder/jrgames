@@ -1,15 +1,15 @@
 package cn.jerrymc.jrgames;
 
+import cn.jerrymc.jrgames.commands.JstopallCommand;
 import cn.jerrymc.jrgames.games.GameManager;
-import dev.lone.itemsadder.api.Events.ItemsAdderLoadDataEvent;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.Objects;
 
 public final class Jrgames extends JavaPlugin implements Listener {
     public Economy economy = null;
@@ -17,7 +17,7 @@ public final class Jrgames extends JavaPlugin implements Listener {
 
     public static Jrgames plugin = null;
 
-    private GameManager gameManager;
+    public GameManager gameManager;
 
     @Override
     public void onEnable() {
@@ -49,6 +49,7 @@ public final class Jrgames extends JavaPlugin implements Listener {
         }
 
         initGames();
+        initCommands();
 
         LOGGER.logger.info(ChatColor.GREEN+"初始化完成!");
     }
@@ -61,9 +62,15 @@ public final class Jrgames extends JavaPlugin implements Listener {
         return true;
     }
 
+    // 初始化游戏
     private void initGames(){
         gameManager.initGames(this);
         LOGGER.logger.info(ChatColor.BLUE+"游戏初始化完成!");
+    }
+
+    // 初始化命令
+    private void initCommands(){
+        Objects.requireNonNull(getCommand("jstopall")).setExecutor(new JstopallCommand(this));
     }
 
     @Override

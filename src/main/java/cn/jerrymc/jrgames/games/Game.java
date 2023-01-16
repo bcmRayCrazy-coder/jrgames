@@ -1,6 +1,7 @@
 package cn.jerrymc.jrgames.games;
 
 import cn.jerrymc.jrgames.Jrgames;
+import cn.jerrymc.jrgames.games.events.GameStateChangeEvent;
 import cn.jerrymc.jrgames.games.events.PlayerJoinGameEvent;
 import cn.jerrymc.jrgames.games.events.PlayerLeaveGameEvent;
 import org.bukkit.Bukkit;
@@ -13,7 +14,7 @@ import java.util.ArrayList;
 public class Game {
     private final Jrgames plugin;
     // 滴答
-    private final Number tick = 0;
+    private int tick = 0;
     // 游戏id
     private String gameName = "";
     // 显示的名字
@@ -21,7 +22,9 @@ public class Game {
     // 当前游戏状态
     private GameState gameState = GameState.WAITING;
     // 游戏监听器
-    private ArrayList<Listener> gameListeners = new ArrayList<>();
+    private final ArrayList<Listener> gameListeners = new ArrayList<>();
+    // 滴答控制器
+    private final GameTickController gameTickController = new GameTickController(this);
 
     public ArrayList<Player> players = new ArrayList<>();
 
@@ -34,13 +37,23 @@ public class Game {
         for(Listener l : getGameListeners()){
             HandlerList.unregisterAll(l);
         }
+        // 停止滴答
+        gameTickController.stopControlling();
+    }
+
+    /**
+     * 游戏滴答一次
+     */
+    public void tick(){
+        tick += 1;
+        onTick(tick);
     }
 
     /**
      * 时刻改变
      * @param tick 目前时刻
      */
-    public void onTick(Number tick){}
+    public void onTick(int tick){}
 
     /**
      * 玩家进入游戏
@@ -74,8 +87,22 @@ public class Game {
         return displayName;
     }
 
-    public void setGameState(GameState gameState) {
-        this.gameState = gameState;
+    /**
+     * 设置游戏状态
+     * 此方法会触发GameStateChangeEvent事件
+     * @param state 目标游戏状态
+     */
+    public void setGameState(GameState state) {
+        setGameStateQuite(state);
+        Bukkit.getPluginManager().callEvent(new GameStateChangeEvent(state,getGameName()));
+    }
+    /**
+     * 设置游戏状态
+     * 静默 - 不触发GameStateChangeEvent事件
+     * @param state 目标游戏状态
+     */
+    public void setGameStateQuite(GameState state){
+        this.gameState = state;
     }
     public GameState getGameState() {
         return gameState;
@@ -94,5 +121,11 @@ public class Game {
     }
     public Number getCurrentTick() {
         return tick;
+    }
+    public GameTickController getGameTickController() {
+        return gameTickController;
+    }
+    public ArrayList<Player> getPlayers() {
+        return players;
     }
 }

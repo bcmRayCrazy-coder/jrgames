@@ -4,3 +4,7 @@ main: cn.jerrymc.jrgames.Jrgames
 api-version: 1.17
 depend: [ PlaceholderAPI, Vault, ItemsAdder ]
 authors: [ bcmray ]
+commands:
+  jstopall:
+    description: 强制停止所有游戏
+    usage: /<command>
