@@ -2,6 +2,7 @@ package cn.jerrymc.jrgames;
 
 import cn.jerrymc.jrgames.commands.JstopallCommand;
 import cn.jerrymc.jrgames.games.GameManager;
+import cn.jerrymc.jrgames.games.snowfight.SnowFight;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -47,6 +48,10 @@ public final class Jrgames extends JavaPlugin implements Listener {
             LOGGER.logger.info(ChatColor.RED +"无法与ScreenEffects插件挂钩!");
             getServer().getPluginManager().disablePlugin(this);
         }
+        if(this.getServer().getPluginManager().getPlugin("Multiverse-Core") == null){
+            LOGGER.logger.info(ChatColor.RED +"无法与Multiverse-Core插件挂钩!");
+            getServer().getPluginManager().disablePlugin(this);
+        }
 
         initGames();
         initCommands();
@@ -64,7 +69,8 @@ public final class Jrgames extends JavaPlugin implements Listener {
 
     // 初始化游戏
     private void initGames(){
-        gameManager.initGames(this);
+        new SnowFight(this);
+        gameManager.initGames();
         LOGGER.logger.info(ChatColor.BLUE+"游戏初始化完成!");
     }
 

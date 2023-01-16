@@ -2,6 +2,7 @@ package cn.jerrymc.jrgames.games;
 
 import cn.jerrymc.jrgames.Jrgames;
 import cn.jerrymc.jrgames.games.events.GameStateChangeEvent;
+import cn.jerrymc.jrgames.games.events.GameTickEvent;
 import cn.jerrymc.jrgames.games.events.PlayerJoinGameEvent;
 import cn.jerrymc.jrgames.games.events.PlayerLeaveGameEvent;
 import org.bukkit.Bukkit;
@@ -32,15 +33,6 @@ public class Game {
         this.plugin = plugin;
     }
 
-    public void gameStopHandler(){
-        // 停止监听
-        for(Listener l : getGameListeners()){
-            HandlerList.unregisterAll(l);
-        }
-        // 停止滴答
-        gameTickController.stopControlling();
-    }
-
     /**
      * 游戏滴答一次
      */
@@ -50,10 +42,37 @@ public class Game {
     }
 
     /**
+     * 游戏初始化
+     */
+    public void init(){
+        // 开始滴答
+        gameTickController.startControlling();
+    }
+
+    /**
+     * 游戏开始
+     */
+    public void start() {}
+
+    /**
+     * 游戏停止
+     */
+    public void stop(){
+        // 停止监听
+        for(Listener l : getGameListeners()){
+            HandlerList.unregisterAll(l);
+        }
+        // 停止滴答
+        gameTickController.stopControlling();
+    }
+
+    /**
      * 时刻改变
      * @param tick 目前时刻
      */
-    public void onTick(int tick){}
+    public void onTick(int tick){
+        Bukkit.getPluginManager().callEvent(new GameTickEvent(tick,getGameName()));
+    }
 
     /**
      * 玩家进入游戏
@@ -89,16 +108,17 @@ public class Game {
 
     /**
      * 设置游戏状态
-     * 此方法会触发GameStateChangeEvent事件
+     * 此方法会触发GameStateChangeEvent事件和清除tick
      * @param state 目标游戏状态
      */
     public void setGameState(GameState state) {
         setGameStateQuite(state);
+        tick = 0;
         Bukkit.getPluginManager().callEvent(new GameStateChangeEvent(state,getGameName()));
     }
     /**
      * 设置游戏状态
-     * 静默 - 不触发GameStateChangeEvent事件
+     * 静默 - 不进行任何其他操作
      * @param state 目标游戏状态
      */
     public void setGameStateQuite(GameState state){
@@ -128,4 +148,5 @@ public class Game {
     public ArrayList<Player> getPlayers() {
         return players;
     }
+
 }

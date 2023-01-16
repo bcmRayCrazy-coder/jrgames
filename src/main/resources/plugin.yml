@@ -2,7 +2,7 @@ name: Jrgames
 version: '${project.version}'
 main: cn.jerrymc.jrgames.Jrgames
 api-version: 1.17
-depend: [ PlaceholderAPI, Vault, ItemsAdder ]
+depend: [ PlaceholderAPI, Vault, ItemsAdder, Multiverse-Core ]
 authors: [ bcmray ]
 commands:
   jstopall:

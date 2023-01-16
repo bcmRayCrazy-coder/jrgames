@@ -18,7 +18,7 @@ public class PlayerEventsListener implements Listener {
 
         for(Game game:GameManager.getGames()){
             // 当前game的地图名
-            String currentGameWorldName = Jrgames.plugin.getConfig().getString("gameMap."+game.getGameName());
+            String currentGameWorldName = Jrgames.plugin.getConfig().getString(game.getGameName()+".map");
 
             if(worldName.equals(currentGameWorldName)){
                 // 进入游戏

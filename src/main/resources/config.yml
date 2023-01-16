@@ -3,6 +3,14 @@
 # 主城所在的世界名
 lobby: 'world'
 
-# 游戏对应的地图名
-gameMap:
-  snowFight: 'snow_fight'
+# 游戏开始倒计时tick (1秒20tick),记得加上1秒
+startCountDownTicks: 420
+
+# snow fight配置
+snowFight:
+  # 地图
+  map: 'snow_fight'
+  # 最少人数
+  minPlayers: 1
+  # 最多人数
+  maxPlayers: 114
