@@ -3,7 +3,7 @@ package cn.jerrymc.jrgames.games.snowfight;
 import cn.jerrymc.jrgames.Jrgames;
 import cn.jerrymc.jrgames.games.Game;
 import cn.jerrymc.jrgames.games.GameManager;
-import cn.jerrymc.jrgames.games.snowfight.events.SnowFightPlayerEvents;
+import cn.jerrymc.jrgames.games.snowfight.listeners.SnowFightPlayerEventsListener;
 
 public class SnowFight extends Game {
     public SnowFight(Jrgames plugin) {
@@ -21,6 +21,6 @@ public class SnowFight extends Game {
      * 初始化事件处理器
      */
     public void initHandlers(){
-        this.registerGameListener(new SnowFightPlayerEvents(this.getPlugin()));
+        this.registerGameListener(new SnowFightPlayerEventsListener(this.getPlugin()));
     }
 }
