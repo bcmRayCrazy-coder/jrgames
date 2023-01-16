@@ -35,7 +35,7 @@ public class GameManager {
         for(Player p: game.getPlayers()){
             // 踢出玩家
             PlayerSender.sendToLobby(p);
-            ScreenEffects.startEffect(ScreenEffectType.fullscreen_transparent,"RED",10,200,10,false,p.getName(),"游戏被强制停止, 您已被踢出游戏! 本次游戏不算入统计信息");
+            ScreenEffects.startEffect(ScreenEffectType.fullscreen_transparent,"RED",10,200,10,false,p.getName(),"游戏被强制停止, 您已被踢出游戏! 本次游玩不算入统计信息");
         }
         game.gameStopHandler();
     }
