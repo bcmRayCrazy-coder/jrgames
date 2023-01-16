@@ -14,6 +14,5 @@ public class SnowFightPlayerEventsListener implements Listener {
 
     @EventHandler
     public void playerJoin(PlayerJoinGameEvent event){
-        LOGGER.logger.info(event.getPlayer().getClientBrandName()+" 加入了游戏 "+event.getGameName());
     }
 }
