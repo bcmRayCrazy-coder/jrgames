@@ -10,3 +10,6 @@ JMC游戏服务器主插件
 - `listeners` 文件下均为事件监听器, 文件名末尾为`EventsListener`
 - 所有存储均从 `Storage` 类实现
 - **使用驼峰式命名法**
+
+### 游戏流程
+<img src="assets/flow.png" />
