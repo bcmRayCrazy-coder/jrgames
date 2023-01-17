@@ -3,8 +3,6 @@ package cn.jerrymc.jrgames.lib;
 import cn.jerrymc.jrgames.Jrgames;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
 import java.text.MessageFormat;
@@ -24,7 +22,7 @@ public class PlayerSender {
      * @param worldName 目标世界名称
      */
     public static void setPlayerWorld(Player player,String worldName){
-        Jrgames.plugin.getServer().dispatchCommand(Bukkit.getConsoleSender(),"mv tp "+player+" "+worldName);
+        Jrgames.plugin.getServer().dispatchCommand(Bukkit.getConsoleSender(),"mv tp "+player.getName()+" "+worldName);
     }
 
     public static void sendCountdownMessage(Player player,int second){

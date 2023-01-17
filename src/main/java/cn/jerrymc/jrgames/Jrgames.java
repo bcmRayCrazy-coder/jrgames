@@ -83,6 +83,10 @@ public final class Jrgames extends JavaPlugin implements Listener {
     public void onDisable() {
         // 取消所有计划事件
         Bukkit.getScheduler().cancelTasks(this);
-        // TODO 提出玩家并重置所有游戏存档
+        // 踢出玩家
+        gameManager.forceStopAllGames();
+        LOGGER.logger.info(ChatColor.BLUE+" 所有游戏已停止!");
+        // 关闭存档
+        Bukkit.unloadWorld(getConfig().getString("snowFight.map","snow_fight"),false);
     }
 }
