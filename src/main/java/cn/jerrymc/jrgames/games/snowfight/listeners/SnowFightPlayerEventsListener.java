@@ -36,6 +36,7 @@ public class SnowFightPlayerEventsListener implements Listener {
         // 玩家加入游戏
         LOGGER.debug("snow fight状态: " + game.getGameState());
         if(game.getGameState().equals(GameState.WAITING)){
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(),"gamemode "+event.getPlayer().getName()+" survival");
             int playerNumber = game.getPlayers().size();
             if(playerNumber >= plugin.getConfig().getInt("snowFight.minPlayers")){
                 // 切换到开始状态
@@ -52,7 +53,8 @@ public class SnowFightPlayerEventsListener implements Listener {
         }else if(game.getGameState().equals(GameState.PLAYING)){
             // 玩家切换为旁观模式观战
             event.getPlayer().sendMessage("该游戏已开始");
-            Bukkit.getScheduler().runTaskLater(plugin,()-> event.getPlayer().setGameMode(GameMode.SPECTATOR),20);
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(),"gamemode "+event.getPlayer().getName()+" spectator");
+            game.getPlayers().remove(event.getPlayer());
         }else{
             // 不允许玩家进入
             PlayerSender.sendToLobby(event.getPlayer());

@@ -37,7 +37,9 @@ public class SnowFightGameStateEventsListener implements Listener {
                     p.getInventory().clear();
                     ItemStack shovel = new ItemStack(Material.DIAMOND_SHOVEL);
                     p.getInventory().setItem(EquipmentSlot.HAND,shovel);
-                    p.teleport(spawnLocation);
+                    if(!p.teleport(spawnLocation)){
+                        Bukkit.dispatchCommand(Bukkit.getConsoleSender(),String.format("tp %s %s %s %s",p.getName(),plugin.getConfig().getDouble("snowFight.spawnX",0D),plugin.getConfig().getDouble("snowFight.spawnY",0D),plugin.getConfig().getDouble("snowFight.spawnZ",0D)));
+                    }
                 }
                 break;
             case STOPPING:
