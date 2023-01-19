@@ -19,3 +19,7 @@ snowFight:
   maxPlayers: 114
   # 游玩时间,tick,记得加上1秒
   playTime: 2420
+  # 游戏开始坐标
+  spawnX: 0
+  spawnY: 20
+  spawnZ: 0

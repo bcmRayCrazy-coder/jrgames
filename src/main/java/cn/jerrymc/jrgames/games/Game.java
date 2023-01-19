@@ -37,7 +37,6 @@ public class Game {
      */
     public void tick(){
         tick += 1;
-        LOGGER.debug("[ticker] Current tick "+tick);
         onTick(tick);
     }
 

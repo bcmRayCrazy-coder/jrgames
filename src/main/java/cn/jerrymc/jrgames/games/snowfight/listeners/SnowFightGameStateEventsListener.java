@@ -7,6 +7,7 @@ import cn.jerrymc.jrgames.games.events.GameStateChangeEvent;
 import cn.jerrymc.jrgames.games.snowfight.SnowFight;
 import cn.jerrymc.jrgames.lib.world.WorldManager;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -31,10 +32,12 @@ public class SnowFightGameStateEventsListener implements Listener {
                 LOGGER.logger.info("snow fight小游戏即将开始");
                 break;
             case PLAYING:
+                Location spawnLocation = new Location(Bukkit.getWorld(plugin.getConfig().getString("snowFight.map","snow_fight")),plugin.getConfig().getDouble("snowFight.spawnX",0D),plugin.getConfig().getDouble("snowFight.spawnY",0D),plugin.getConfig().getDouble("snowFight.spawnZ",0D));
                 for(Player p:game.getPlayers()){
                     p.getInventory().clear();
                     ItemStack shovel = new ItemStack(Material.DIAMOND_SHOVEL);
                     p.getInventory().setItem(EquipmentSlot.HAND,shovel);
+                    p.teleport(spawnLocation);
                 }
                 break;
             case STOPPING:

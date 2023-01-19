@@ -52,7 +52,7 @@ public class SnowFightPlayerEventsListener implements Listener {
         }else if(game.getGameState().equals(GameState.PLAYING)){
             // 玩家切换为旁观模式观战
             event.getPlayer().sendMessage("该游戏已开始");
-            event.getPlayer().setGameMode(GameMode.SPECTATOR);
+            Bukkit.getScheduler().runTaskLater(plugin,()-> event.getPlayer().setGameMode(GameMode.SPECTATOR),20);
         }else{
             // 不允许玩家进入
             PlayerSender.sendToLobby(event.getPlayer());
