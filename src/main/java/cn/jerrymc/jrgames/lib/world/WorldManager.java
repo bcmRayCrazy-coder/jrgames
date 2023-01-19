@@ -52,10 +52,20 @@ public class WorldManager {
     }
 
     /**
+     * 创建世界备份
+     * @param name 世界名称
+     * @param replace 是否替换
+     */
+    public static void backupWorld(String name,boolean replace){
+        LOGGER.debug("创建世界 "+name+" 备份");
+        new WorldZipper(name,replace);
+    }
+
+    /**
      * 重置世界
      * @param name 世界名称
      */
-    public void restoreWorld(String name){
+    public static void restoreWorld(String name){
         // 备份的世界, 原世界
         File zipWorld = new File(backupFolder,name+".zip"),
              originWorld = new File(Bukkit.getWorldContainer(),name);
@@ -65,7 +75,7 @@ public class WorldManager {
         }
         if(!zipWorld.exists()){
             // 创建世界备份
-            new WorldZipper(name,true);
+            backupWorld(name,true);
         }else{
             // 解压并还原世界
             try{

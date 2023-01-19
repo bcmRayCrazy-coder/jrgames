@@ -5,6 +5,10 @@ api-version: 1.17
 depend: [ PlaceholderAPI, Vault, ItemsAdder, Multiverse-Core ]
 authors: [ bcmray ]
 commands:
+  jg:
+    description: 游戏主命令
+    usage: /jg <action> [...parms]
+
   jstopall:
     description: 强制停止所有游戏
     usage: /jstopall

@@ -1,5 +1,6 @@
 package cn.jerrymc.jrgames.lib.file;
 
+import cn.jerrymc.jrgames.LOGGER;
 import cn.jerrymc.jrgames.lib.world.WorldManager;
 import org.bukkit.Bukkit;
 
@@ -19,6 +20,7 @@ public class WorldZipper {
     public WorldZipper(String worldName, boolean replace) {
         this.worldName = worldName;
         this.replace = replace;
+        LOGGER.debug("压缩世界目标: "+getBackupFile());
         execute();
     }
 
@@ -35,6 +37,7 @@ public class WorldZipper {
     private void zipWorldFolder() throws IOException {
         File worldFolder = getWorldFolder();
         File backupFile = getBackupFile();
+        LOGGER.debug("正在压缩世界 "+worldFolder.getPath()+" 到 "+backupFile.getPath());
         ZipFileUtil.zipDirectory(worldFolder, backupFile);
     }
 

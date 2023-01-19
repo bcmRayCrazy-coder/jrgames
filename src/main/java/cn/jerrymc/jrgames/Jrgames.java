@@ -1,15 +1,21 @@
 package cn.jerrymc.jrgames;
 
+import cn.jerrymc.jrgames.commands.JgMainCommand;
 import cn.jerrymc.jrgames.commands.JstopallCommand;
 import cn.jerrymc.jrgames.games.GameManager;
 import cn.jerrymc.jrgames.games.snowfight.SnowFight;
+import cn.jerrymc.jrgames.lib.file.FileUtil;
+import cn.jerrymc.jrgames.lib.world.WorldManager;
 import net.milkbowl.vault.economy.Economy;
+import org.apache.commons.io.FileUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Objects;
 
 public final class Jrgames extends JavaPlugin implements Listener {
@@ -56,6 +62,15 @@ public final class Jrgames extends JavaPlugin implements Listener {
         initGames();
         initCommands();
 
+        // 初始化目录
+        if(!WorldManager.backupFolder.exists()){
+            try {
+                FileUtils.forceMkdir(WorldManager.backupFolder);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
         LOGGER.logger.info(ChatColor.GREEN+"初始化完成!");
     }
 
@@ -77,6 +92,7 @@ public final class Jrgames extends JavaPlugin implements Listener {
     // 初始化命令
     private void initCommands(){
         Objects.requireNonNull(getCommand("jstopall")).setExecutor(new JstopallCommand(this));
+        Objects.requireNonNull(getCommand("jg")).setExecutor(new JgMainCommand(this));
     }
 
     @Override

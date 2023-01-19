@@ -1,6 +1,5 @@
 package cn.jerrymc.jrgames.games;
 
-import cn.jerrymc.jrgames.Jrgames;
 import cn.jerrymc.jrgames.LOGGER;
 import cn.jerrymc.jrgames.games.listeners.PlayerEventsListener;
 import cn.jerrymc.jrgames.lib.PlayerSender;
@@ -26,6 +25,7 @@ public class GameManager {
      */
     public void initGames(){
         for(Game g:getGames()){
+            LOGGER.debug("初始化游戏 "+g.getGameName());
             g.init();
         }
     }

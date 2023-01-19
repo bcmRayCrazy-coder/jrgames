@@ -16,7 +16,7 @@ public final class ZipFileUtil {
     public static void zipDirectory(File dir, File zipFile) throws IOException {
         FileOutputStream fout = new FileOutputStream(zipFile);
         ZipOutputStream zout = new ZipOutputStream(fout);
-        zout.setComment("1145141919810bcmray");
+//        zout.setComment("1145141919810bcmray");
         zipSubDirectory("", dir, zout);
         zout.close();
     }

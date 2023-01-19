@@ -1,6 +1,7 @@
 package cn.jerrymc.jrgames.games;
 
 import cn.jerrymc.jrgames.Jrgames;
+import cn.jerrymc.jrgames.LOGGER;
 import cn.jerrymc.jrgames.games.events.GameStateChangeEvent;
 import cn.jerrymc.jrgames.games.events.GameTickEvent;
 import cn.jerrymc.jrgames.games.events.PlayerJoinGameEvent;
@@ -24,8 +25,6 @@ public class Game {
     private GameState gameState = GameState.WAITING;
     // 游戏监听器
     private final ArrayList<Listener> gameListeners = new ArrayList<>();
-    // 滴答控制器
-    private final GameTickController gameTickController = new GameTickController(this);
 
     public ArrayList<Player> players = new ArrayList<>();
 
@@ -38,6 +37,7 @@ public class Game {
      */
     public void tick(){
         tick += 1;
+        LOGGER.debug("[ticker] Current tick "+tick);
         onTick(tick);
     }
 
@@ -45,14 +45,7 @@ public class Game {
      * 游戏初始化
      */
     public void init(){
-        // 开始滴答
-        gameTickController.startControlling();
     }
-
-    /**
-     * 游戏开始
-     */
-    public void start() {}
 
     /**
      * 游戏停止
@@ -62,8 +55,6 @@ public class Game {
         for(Listener l : getGameListeners()){
             HandlerList.unregisterAll(l);
         }
-        // 停止滴答
-        gameTickController.stopControlling();
     }
 
     /**
@@ -79,7 +70,10 @@ public class Game {
      * @param p 玩家
      */
     public void onPlayerJoin(Player p){
-        players.add(p);
+        if(getGameState().equals(GameState.WAITING)||getGameState().equals(GameState.PLAYING)) {
+            // 加入游玩列表
+            players.add(p);
+        }
         Bukkit.getPluginManager().callEvent(new PlayerJoinGameEvent(p,getGameName()));
     }
 
@@ -139,11 +133,8 @@ public class Game {
     public Jrgames getPlugin() {
         return plugin;
     }
-    public Number getCurrentTick() {
+    public int getCurrentTick() {
         return tick;
-    }
-    public GameTickController getGameTickController() {
-        return gameTickController;
     }
     public ArrayList<Player> getPlayers() {
         return players;

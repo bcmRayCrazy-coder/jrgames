@@ -55,7 +55,6 @@ public class GameCountDown {
             for(Player p :game.getPlayers()){
                 ScreenEffects.startEffect(ScreenEffectType.fullscreen_transparent,"#00CC33",5,10,5,false, p.getName(), "游戏开始!");
             }
-            game.start();
             game.setGameState(GameState.PLAYING);
         }
     }

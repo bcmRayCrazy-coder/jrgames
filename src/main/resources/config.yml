@@ -6,6 +6,9 @@ lobby: 'world'
 # 游戏开始倒计时tick (1秒20tick),记得加上1秒
 startCountDownTicks: 420
 
+# 调试模式
+debug: true
+
 # snow fight配置
 snowFight:
   # 地图
@@ -14,3 +17,5 @@ snowFight:
   minPlayers: 1
   # 最多人数
   maxPlayers: 114
+  # 游玩时间,tick,记得加上1秒
+  playTime: 2420
