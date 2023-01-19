@@ -5,15 +5,17 @@ import cn.jerrymc.jrgames.LOGGER;
 import cn.jerrymc.jrgames.games.GameState;
 import cn.jerrymc.jrgames.games.events.GameStateChangeEvent;
 import cn.jerrymc.jrgames.games.snowfight.SnowFight;
+import cn.jerrymc.jrgames.lib.ScreenEffectType;
+import cn.jerrymc.jrgames.lib.ScreenEffects;
 import cn.jerrymc.jrgames.lib.world.WorldManager;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.Material;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
+
+import java.text.MessageFormat;
 
 public class SnowFightGameStateEventsListener implements Listener {
     private final Jrgames plugin;
@@ -49,6 +51,19 @@ public class SnowFightGameStateEventsListener implements Listener {
                 game.setGameState(GameState.RESTARTING);
                 break;
             case ENDING:
+                LOGGER.debug("snowFight游戏结束");
+                StringBuilder win = new StringBuilder();
+                for (Player p : game.getPlayers()) {
+                    if (p.getGameMode().equals(GameMode.SURVIVAL)) {
+                        ScreenEffects.startEffect(ScreenEffectType.fullscreen_transparent, "GREEN", 10, 60, 10, false, p.getName(), "胜利!");
+                        win.append(p.getName()).append(", ");
+                    } else {
+                        ScreenEffects.startEffect(ScreenEffectType.fullscreen_transparent, "BLUE", 10, 60, 10, false, p.getName(), "游戏结束!");
+                    }
+                }
+                for (Player p : Bukkit.getServer().getOnlinePlayers()) {
+                    p.sendMessage(MessageFormat.format("{0}[雪战游戏]{1}游戏结束, 胜利者: {2}{3}", ChatColor.AQUA, ChatColor.YELLOW, ChatColor.GREEN, win));
+                }
                 for(Player p:game.getPlayers()){
                     p.getInventory().clear();
                 }

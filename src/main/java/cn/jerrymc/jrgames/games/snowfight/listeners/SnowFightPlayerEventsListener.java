@@ -9,11 +9,8 @@ import cn.jerrymc.jrgames.games.snowfight.SnowFight;
 import cn.jerrymc.jrgames.lib.PlayerSender;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.GameMode;
 import org.bukkit.Material;
-import org.bukkit.block.Block;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -71,6 +68,21 @@ public class SnowFightPlayerEventsListener implements Listener {
             }
             // 移除玩家
             game.getPlayers().remove(event.getPlayer());
+            int playerNumber = game.getPlayers().size();
+            if(game.getGameState().equals(GameState.STARTING)) {
+                // 检测是否可以开始
+                if (playerNumber <= plugin.getConfig().getInt("snowFight.minPlayers")) {
+                    // 切换到等待状态
+                    game.setGameState(GameState.WAITING);
+                    for (Player p : game.getPlayers()) {
+                        p.sendMessage(ChatColor.RED + "人数不足, 倒计时停止");
+                    }
+                }
+            }else if(game.getGameState().equals(GameState.PLAYING)){
+                if(playerNumber <= 1){
+                    game.setGameState(GameState.ENDING);
+                }
+            }
         }
     }
 
