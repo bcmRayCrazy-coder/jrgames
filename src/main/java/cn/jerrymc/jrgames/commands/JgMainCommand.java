@@ -2,6 +2,7 @@ package cn.jerrymc.jrgames.commands;
 
 import cn.jerrymc.jrgames.Jrgames;
 import cn.jerrymc.jrgames.commands.jgCommand.GetState;
+import cn.jerrymc.jrgames.commands.jgCommand.Join;
 import cn.jerrymc.jrgames.commands.jgCommand.SetupGame;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -17,6 +18,7 @@ import java.util.List;
 public class JgMainCommand implements TabCompleter, CommandExecutor {
     private final SetupGame setupGame;
     private final GetState getState;
+    private final Join join;
 
     private final Jrgames plugin;
 
@@ -24,6 +26,7 @@ public class JgMainCommand implements TabCompleter, CommandExecutor {
         this.plugin = plugin;
         this.setupGame = new SetupGame(plugin);
         this.getState = new GetState();
+        this.join = new Join();
     }
 
     @Override
@@ -37,6 +40,8 @@ public class JgMainCommand implements TabCompleter, CommandExecutor {
                 return setupGame.onCommand(sender,command,label,args);
             case "state":
                 return getState.onCommand(sender,command,label,args);
+            case "join":
+                return join.onCommand(sender,command,label,args);
             default:
                 sender.sendMessage(ChatColor.RED+"未知的参数: "+args[0]);
         }
@@ -56,6 +61,9 @@ public class JgMainCommand implements TabCompleter, CommandExecutor {
                     break;
                 case "state":
                     autoCompletes = getState.onTabComplete(sender,command,alias,args);
+                    break;
+                case "join":
+                    autoCompletes = join.onTabComplete(sender,command,alias,args);
                     break;
             }
         }
