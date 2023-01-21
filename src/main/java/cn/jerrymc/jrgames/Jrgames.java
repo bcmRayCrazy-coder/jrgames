@@ -4,8 +4,8 @@ import cn.jerrymc.jrgames.commands.JgMainCommand;
 import cn.jerrymc.jrgames.commands.JstopallCommand;
 import cn.jerrymc.jrgames.games.GameManager;
 import cn.jerrymc.jrgames.games.snowfight.SnowFight;
-import cn.jerrymc.jrgames.lib.file.FileUtil;
 import cn.jerrymc.jrgames.lib.world.WorldManager;
+import cn.jerrymc.jrgames.motd.Motd;
 import net.milkbowl.vault.economy.Economy;
 import org.apache.commons.io.FileUtils;
 import org.bukkit.Bukkit;
@@ -14,7 +14,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
 
@@ -59,8 +58,10 @@ public final class Jrgames extends JavaPlugin implements Listener {
             getServer().getPluginManager().disablePlugin(this);
         }
 
+        // 初始化
         initGames();
         initCommands();
+        Motd.init(this);
 
         // 初始化目录
         if(!WorldManager.backupFolder.exists()){
