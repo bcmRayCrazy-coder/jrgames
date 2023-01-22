@@ -8,7 +8,14 @@ commands:
   jg:
     description: 游戏主命令
     usage: /jg <action> [...parms]
+    permission: jrgames.user
 
   jstopall:
     description: 强制停止所有游戏
     usage: /jstopall
+    permission: jrgames.admin
+permissions:
+  jrgames.admin:
+    description: 管理员指令
+  jrgames.user:
+    description: 用户指令

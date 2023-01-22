@@ -1,6 +1,7 @@
 package cn.jerrymc.jrgames.commands;
 
 import cn.jerrymc.jrgames.Jrgames;
+import cn.jerrymc.jrgames.PluginInfo;
 import cn.jerrymc.jrgames.commands.jgCommand.GetState;
 import cn.jerrymc.jrgames.commands.jgCommand.Join;
 import cn.jerrymc.jrgames.commands.jgCommand.Menu;
@@ -23,7 +24,7 @@ public class JgMainCommand implements TabCompleter, CommandExecutor {
     private final Menu menu;
 
     public JgMainCommand(Jrgames plugin){
-        this.setupGame = new SetupGame(plugin);
+        this.setupGame = new SetupGame();
         this.getState = new GetState();
         this.join = new Join();
         this.menu = new Menu(plugin);
@@ -32,7 +33,7 @@ public class JgMainCommand implements TabCompleter, CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if(args.length == 0||args[0].equals("info")){
-            sender.sendMessage(ChatColor.AQUA+"Jrgames主插件 v1.0.0 by bcmray");
+            sender.sendMessage(ChatColor.AQUA+"Jrgames主插件 v"+ PluginInfo.version+" by "+PluginInfo.author);
             return true;
         }
         switch (args[0]){
@@ -56,6 +57,10 @@ public class JgMainCommand implements TabCompleter, CommandExecutor {
         if(args.length == 0) {
             autoCompletes.add("setup");
             autoCompletes.add("info");
+            autoCompletes.add("state");
+            autoCompletes.add("menu");
+            autoCompletes.add("join");
+            autoCompletes.add("build");
         }else {
             switch (args[0]) {
                 case "setup":

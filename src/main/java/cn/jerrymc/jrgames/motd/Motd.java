@@ -1,10 +1,14 @@
 package cn.jerrymc.jrgames.motd;
 
 import cn.jerrymc.jrgames.Jrgames;
-import cn.jerrymc.jrgames.games.listeners.PlayerEventsListener;
 
 public class Motd {
-    public static void init(Jrgames plugin){
-        plugin.getServer().getPluginManager().registerEvents(new PingEventListener(),plugin);
+    private final Jrgames plugin;
+
+    public Motd(Jrgames plugin){
+        this.plugin = plugin;
+    }
+    public void init(){
+        plugin.getServer().getPluginManager().registerEvents(new PingEventListener(plugin),plugin);
     }
 }

@@ -1,7 +1,6 @@
 package cn.jerrymc.jrgames.commands.jgCommand;
 
 import cn.jerrymc.jrgames.Jrgames;
-import cn.jerrymc.jrgames.Storage;
 import cn.jerrymc.jrgames.lib.world.WorldManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -17,28 +16,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SetupGame implements CommandExecutor, TabCompleter {
-    private final Jrgames plugin;
 
-    public SetupGame(Jrgames plugin){
-        this.plugin = plugin;
-    }
+    public SetupGame(){}
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         // args[0]是setup, 固定的, 传参在args[1]中
-        if(args[1] == null|args[1].length() == 0) return false;
+        if(args[1].length() == 0) return false;
         if(Bukkit.getWorld(args[1]) == null){
             sender.sendMessage(ChatColor.RED + "指定游戏世界不存在!");
             return true;
         }
 
         // 创建世界备份
-        if(plugin.storage.getConfig().getBoolean("backup."+args[1],false)){
-            sender.sendMessage(ChatColor.RED + "指定世界已经备份过了!");
-            return true;
-        }
-        plugin.storage.getConfig().set("backup."+args[1],true);
-        plugin.storage.saveConfig();
         WorldManager.backupWorld(args[1],true);
         sender.sendMessage(ChatColor.GREEN + "世界 " + args[1] + " 初始化完成!");
         return true;

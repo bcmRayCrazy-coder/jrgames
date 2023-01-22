@@ -9,6 +9,22 @@ startCountDownTicks: 420
 # 调试模式
 debug: true
 
+# MOTD
+# 显示样板:
+# 名称 - 简介 | 更多1
+# 群 | 更多2
+motd:
+  # 名称
+  name: 'JRGames'
+  # 介绍
+  description: 'JMC小游戏周目'
+  # 更多1
+  more1: '期待您的到来'
+  # 群
+  qun: 'QQ群 799512425'
+  # 更多2
+  more2: '请从 mc.hjfunny.site 进入'
+
 # snow fight配置
 snowFight:
   # 地图

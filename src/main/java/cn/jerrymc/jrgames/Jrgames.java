@@ -6,6 +6,7 @@ import cn.jerrymc.jrgames.games.GameManager;
 import cn.jerrymc.jrgames.games.snowfight.SnowFight;
 import cn.jerrymc.jrgames.lib.world.WorldManager;
 import cn.jerrymc.jrgames.motd.Motd;
+import cn.jerrymc.jrgames.ranks.Ranks;
 import net.milkbowl.vault.economy.Economy;
 import org.apache.commons.io.FileUtils;
 import org.bukkit.Bukkit;
@@ -22,6 +23,7 @@ public final class Jrgames extends JavaPlugin implements Listener {
     public Storage storage;
 
     public static Jrgames plugin = null;
+    public static PAPIExpansion papiExpansion = null;
 
     public GameManager gameManager;
 
@@ -31,6 +33,7 @@ public final class Jrgames extends JavaPlugin implements Listener {
         plugin = this;
         storage = new Storage();
         gameManager = new GameManager();
+        papiExpansion = new PAPIExpansion();
         this.saveDefaultConfig();
 
         // 初始化logger
@@ -61,7 +64,9 @@ public final class Jrgames extends JavaPlugin implements Listener {
         // 初始化
         initGames();
         initCommands();
-        Motd.init(this);
+        new Motd(this).init();
+        new Ranks(this).init();
+        papiExpansion.register();
 
         // 初始化目录
         if(!WorldManager.backupFolder.exists()){

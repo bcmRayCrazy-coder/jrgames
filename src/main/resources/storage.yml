@@ -2,3 +2,9 @@
 
 # 来过的玩家
 players: []
+
+# 玩家称号 内容 - 命名空间:id
+ranks:
+  bcmray:
+    - "betterranks:developer"
+    - "jrgames:year2023"
